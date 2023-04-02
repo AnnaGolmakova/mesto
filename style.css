@@ -102,3 +102,68 @@
   cursor: pointer;
   margin: 36px 0 0 0;
 }
+
+.add-button:hover {
+  opacity: 0.6;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 36px 0 0 0;
+  padding: 0;
+  list-style: none;
+  gap: 20px;
+}
+
+.card {
+  background-color: #FFFFFF;
+  width: 100%;
+  border-radius: 10px;
+  margin: 0;
+  overflow: hidden;
+}
+
+.card__image {
+  width: 100%;
+  object-fit: contain;
+}
+
+.cards__description {
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px 0 21px;
+}
+
+.card__title {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000000;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.card__like-button {
+  width: 22px;
+  height: 19px;
+  background-color: #FFFFFF;
+  background-image: url(./images/icon-like.svg);
+  border: none;
+  cursor: pointer;
+}
+
+.card__like-button:hover {
+  opacity: 0.5;
+}
+
+.card__like-button:active {
+  background-image: url(./images/icon-like-active.svg);
+}
