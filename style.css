@@ -1,19 +1,24 @@
 .body {
-  background-color:black;
+  background-color: #000000;
+  font-family: 'Inter', Arial, sans-serif;
 }
 
 .page {
-  font-family: 'Inter', Arial, sans-serif;
+
 }
 
 .header {
   display: flex;
   flex-direction: row;
-  margin: 28px 0 0 0;
+  justify-content: start;
+  align-items: center;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  height: 84px;
+  width: 100%;
 }
 
 .header__logo {
-  margin: 0 auto 0 27px;
+  margin: 0 0 0 27px;
 }
 
 .content {
@@ -39,12 +44,61 @@
 }
 
 .profile__info-editable {
-
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  position: relative;
 }
 
 .profile__info-title {
+  text-align: center;
   font-weight: 500;
   font-size: 27px;
   line-height: 33px;
   color: #FFFFFF;
+  margin: 0;
+}
+
+.profile__info-button {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(100% + 10px);
+  margin: auto;
+}
+
+.edit-button {
+  height: 18px;
+  width: 18px;
+  background-color: #000000;
+  border: 1px solid #FFFFFF;
+  background-image: url(./images/icon-edit.svg);
+  background-size: contain;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  opacity: 0.6;
+}
+
+.profile__info-subtitle {
+  text-align: center;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+  margin: 14px 0 0 0;
+}
+
+.add-button {
+  height: 50px;
+  width: 100%;
+  background-color: #000000;
+  border: 2px solid #FFFFFF;
+  background-image: url(./images/icon-plus.svg);
+  background-size: 16px 16px;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  margin: 36px 0 0 0;
 }
