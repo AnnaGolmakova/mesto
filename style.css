@@ -3,10 +3,6 @@
   font-family: 'Inter', Arial, sans-serif;
 }
 
-.page {
-
-}
-
 .header {
   display: flex;
   flex-direction: row;
@@ -128,7 +124,8 @@
 
 .card__image {
   width: 100%;
-  object-fit: contain;
+  aspect-ratio: 1;
+  object-fit: cover;
 }
 
 .cards__description {
@@ -156,6 +153,8 @@
   height: 19px;
   background-color: #FFFFFF;
   background-image: url(./images/icon-like.svg);
+  background-size: contain;
+  flex: none;
   border: none;
   cursor: pointer;
 }
@@ -166,4 +165,18 @@
 
 .card__like-button:active {
   background-image: url(./images/icon-like-active.svg);
+  opacity: 1;
+}
+
+.footer {
+  display: inline-block;
+  margin: 48px 19px 36px 19px;
+}
+
+.footer__copyright {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #545454;
+  margin: 0;
 }
