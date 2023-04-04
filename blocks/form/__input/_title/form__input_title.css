@@ -1,0 +1,9 @@
+.form__input_title {
+  margin: 75px 0 0 0;
+}
+
+@media only screen and (min-width: 800px) {
+  .form__input_title {
+    margin: 54px 0 0 0;
+  }
+}
