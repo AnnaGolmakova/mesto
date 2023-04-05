@@ -4,3 +4,9 @@
   align-items: baseline;
   gap: 10px;
 }
+
+@media only screen and (min-width: 800px) {
+  .profile__info-editable {
+    gap: 18px;
+  }
+}
