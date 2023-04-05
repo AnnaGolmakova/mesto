@@ -4,12 +4,12 @@
   justify-content: start;
   align-items: center;
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
-  height: 84px;
+  padding: 30px 0;
   width: 100%;
 }
 
 @media only screen and (min-width: 800px) {
   .header {
-    height: 118px;
+    padding: 42px 0;
   }
 }
