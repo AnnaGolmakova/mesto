@@ -7,6 +7,7 @@
   background-image: url(../../images/icon-edit.svg);
   background-size: contain;
   cursor: pointer;
+  background-repeat: no-repeat;
 }
 
 @media only screen and (min-width: 800px) {

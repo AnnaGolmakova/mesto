@@ -4,6 +4,7 @@
   background-color: #FFFFFF;
   background-image: url(../../../images/icon-like.svg);
   background-size: contain;
+  background-repeat: no-repeat;
   flex: none;
   border: none;
   cursor: pointer;
