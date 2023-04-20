@@ -26,48 +26,6 @@
       </section>
       <section class="pictures">
         <ul class="cards">
-          <li class="card">
-            <img src="./images/cherkessya.png" class="card__image" alt="Карачаевск">
-            <div class="card__description">
-              <h2 class="card__title">Карачаевск</h2>
-              <button type="button" class="card__like-button"><span aria-label="Лайк"></span></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/elbrus.png" class="card__image" alt="Эльбрус">
-            <div class="card__description">
-              <h2 class="card__title">Гора Эльбрус</h2>
-              <button type="button" class="card__like-button"><span aria-label="Лайк"></span></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/dombay.png" class="card__image" alt="Домбай">
-            <div class="card__description">
-              <h2 class="card__title">Домбай</h2>
-              <button type="button" class="card__like-button"><span aria-label="Лайк"></span></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/dagestan.jpg" class="card__image" alt="Дагестан">
-            <div class="card__description">
-              <h2 class="card__title">Дагестан</h2>
-              <button type="button" class="card__like-button"><span aria-label="Лайк"></span></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/kamchatka.jpg" class="card__image" alt="Камчатка">
-            <div class="card__description">
-              <h2 class="card__title">Камчатка</h2>
-              <button type="button" class="card__like-button"><span aria-label="Лайк"></span></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/sochi.jpg" class="card__image" alt="Сочи">
-            <div class="card__description">
-              <h2 class="card__title">Сочи</h2>
-              <button type="button" class="card__like-button"><span aria-label="Лайк"></span></button>
-            </div>
-          </li>
         </ul>
       </section>
     </main>
@@ -75,7 +33,7 @@
       <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
     </footer>
   </div>
-  <div class="popup">
+  <div class="popup popup_edit">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <form name="edit-profile" class="form">
@@ -86,6 +44,26 @@
       <button type="button" class="popup__close"></button>
     </div>
   </div>
+  <div class="popup popup_add">
+    <div class="popup__container">
+      <h2 class="popup__title">Новое место</h2>
+      <form name="create-place" class="form">
+        <input type="text" name="name" class="form__input form__input_title" placeholder="Название">
+        <input type="text" name="url" class="form__input form__input_subtitle" placeholder="Ссылка на картинку">
+        <button type="submit" class="form__save-button">Создать</button>
+      </form>
+      <button type="button" class="popup__close"></button>
+  </div>
+  <template id="card-template">
+    <li class="card">
+      <img class="card__image">
+      <div class="card__description">
+        <h2 class="card__title"></h2>
+        <button type="button" class="card__like-button"><span aria-label="Лайк"></span></button>
+      </div>
+      <button type="button" class="card__delete-button"><span aria-label="Удалить"></span></button>
+    </li>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
