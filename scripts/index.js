@@ -169,4 +169,3 @@ let placeTitle = formPlaceCreation.querySelector(".form__input_title");
 let placeUrl = formPlaceCreation.querySelector(".form__input_subtitle");
 
 formPlaceCreation.addEventListener('submit', handleCardCreate);
-
