@@ -93,6 +93,8 @@ function openEditPopup(evt) {
 function openAddPopup(evt) {
   page.style.overflow = "hidden";
   popupAdd.classList.add("popup_opened");
+  placeTitle.value = "";
+  placeUrl.value = "";
 }
 
 let editButton = document.querySelector(".edit-button");
@@ -105,11 +107,6 @@ let closeButtons = document.querySelectorAll(".popup__close");
 closeButtons.forEach((element) => {
   element.addEventListener("click", closePopup);
 });
-
-
-let formElement = document.querySelector(".form");
-let nameInput = formElement.querySelector(".form__input_title");
-let jobInput = formElement.querySelector(".form__input_subtitle");
 
 // Обработчик «отправки» формы
 function handleFormSubmit (evt) {
@@ -133,7 +130,11 @@ function handleFormSubmit (evt) {
   closePopup();
 }
 
-formElement.addEventListener('submit', handleFormSubmit);
+let formEditProfile = document.getElementsByName("edit-profile")[0];
+let nameInput = formEditProfile.querySelector(".form__input_title");
+let jobInput = formEditProfile.querySelector(".form__input_subtitle");
+
+formEditProfile.addEventListener('submit', handleFormSubmit);
 
 //Обработчик создания карточки
 function handleCardCreate (evt) {
