@@ -70,12 +70,12 @@ function openPreview (place) {
   popupPreview.querySelector('.popup__caption').textContent = place.name;
 }
 
-let page = document.querySelector("body");
-let popupEdit = document.querySelector(".popup_edit");
-let popupAdd = document.querySelector(".popup_add");
-let popupPreview = document.querySelector(".popup_preview")
-let profileTitle = document.querySelector(".profile__info-title");
-let profileSubtitle = document.querySelector(".profile__info-subtitle");
+const page = document.querySelector("body");
+const popupEdit = document.querySelector(".popup_edit");
+const popupAdd = document.querySelector(".popup_add");
+const popupPreview = document.querySelector(".popup_preview")
+const profileTitle = document.querySelector(".profile__info-title");
+const profileSubtitle = document.querySelector(".profile__info-subtitle");
 
 // Обработчик закрытия попапа
 function closePopup() {
@@ -101,13 +101,13 @@ function openAddPopup(evt) {
   placeUrl.value = "";
 }
 
-let editButton = document.querySelector(".edit-button");
+const editButton = document.querySelector(".edit-button");
 editButton.addEventListener("click", openEditPopup);
 
-let addButton = document.querySelector(".add-button");
+const addButton = document.querySelector(".add-button");
 addButton.addEventListener("click", openAddPopup);
 
-let closeButtons = document.querySelectorAll(".popup__close");
+const closeButtons = document.querySelectorAll(".popup__close");
 closeButtons.forEach((element) => {
   element.addEventListener("click", closePopup);
 });
@@ -134,9 +134,9 @@ function handleFormSubmit (evt) {
   closePopup();
 }
 
-let formEditProfile = document.getElementsByName("edit-profile")[0];
-let nameInput = formEditProfile.querySelector(".form__input_title");
-let jobInput = formEditProfile.querySelector(".form__input_subtitle");
+const formEditProfile = document.getElementsByName("edit-profile")[0];
+const nameInput = formEditProfile.querySelector(".form__input_title");
+const jobInput = formEditProfile.querySelector(".form__input_subtitle");
 
 formEditProfile.addEventListener('submit', handleFormSubmit);
 
@@ -164,8 +164,8 @@ function handleCardCreate (evt) {
   closePopup();
 }
 
-let formPlaceCreation = document.getElementsByName("create-place")[0];
-let placeTitle = formPlaceCreation.querySelector(".form__input_title");
-let placeUrl = formPlaceCreation.querySelector(".form__input_subtitle");
+const formPlaceCreation = document.getElementsByName("create-place")[0];
+const placeTitle = formPlaceCreation.querySelector(".form__input_title");
+const placeUrl = formPlaceCreation.querySelector(".form__input_subtitle");
 
 formPlaceCreation.addEventListener('submit', handleCardCreate);
