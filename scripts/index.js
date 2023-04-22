@@ -64,6 +64,7 @@ function handleLike (evt) {
 function openPreview (place) {
   page.style.overflow = "hidden";
   popupPreview.classList.add("popup_opened");
+  popupPreview.setAttribute('aria-hidden', 'false');
   popupPreview.querySelector('.popup__image').src = place.link;
   popupPreview.querySelector('.popup__image').alt = place.name;
   popupPreview.querySelector('.popup__caption').textContent = place.name;
@@ -80,12 +81,14 @@ let profileSubtitle = document.querySelector(".profile__info-subtitle");
 function closePopup() {
   page.style.removeProperty("overflow");
   document.querySelector(".popup_opened").classList.remove("popup_opened");
+  document.querySelector(".popup_opened").setAttribute('aria-hidden', 'true');
 }
 
 // Обработчик открытия попапа
 function openEditPopup(evt) {
   page.style.overflow = "hidden";
   popupEdit.classList.add("popup_opened");
+  popupEdit.setAttribute('aria-hidden', 'false');
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
 }
@@ -93,6 +96,7 @@ function openEditPopup(evt) {
 function openAddPopup(evt) {
   page.style.overflow = "hidden";
   popupAdd.classList.add("popup_opened");
+  popupAdd.setAttribute('aria-hidden', 'false');
   placeTitle.value = "";
   placeUrl.value = "";
 }
