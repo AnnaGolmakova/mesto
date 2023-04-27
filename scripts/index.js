@@ -1,33 +1,30 @@
-let previousCardID = 0;
+const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
 
-const cardTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('.cards');
 
 function createCard(place) {
   const card = cardTemplate.cloneNode(true);
 
-  let cardID = previousCardID + 1;
-
   card.querySelector('.card__image').src = place.link;
   card.querySelector('.card__image').alt = place.name;
   card.querySelector('.card__title').textContent = place.name;
-  card.querySelector('.card').id = cardID;
   card.querySelector('.card__like-button').addEventListener("click", handleLike);
   card.querySelector('.card__delete-button').addEventListener("click", () => {
-    deleteCard(cardID);
+    deleteCard(card);
   });
   card.querySelector('.card__image').addEventListener("click", () => {
     openPreview(place);
   });
 
-  cardsList.prepend(card);
-  previousCardID = cardID;
+  return card;
 }
 
-initialCards.forEach(createCard)
+initialCards.forEach((place) => {
+  cardsList.append(createCard(place));
+});
 
-function deleteCard(id) {
-  document.getElementById(id).remove();
+function deleteCard(card) {
+  card.remove();
 }
 
 function handleLike (evt) {
@@ -130,10 +127,10 @@ function handleCardCreate (evt) {
     return;
   }
 
-  createCard({
+  cardsList.prepend(createCard({
     name: placeTitle.value,
     link: placeUrl.value
-  })
+  }));
   closePopup();
 }
 
