@@ -14,7 +14,7 @@ const addButton = document.querySelector(".add-button");
 // Поп-ап добавления места
 const popupAdd = document.querySelector(".popup_add");
 const closeAddPopupButton = popupAdd.querySelector(".popup__close");
-const formPlaceCreation = document.getElementsByName("create-place")[0];
+const formPlaceCreation = popupAdd.querySelector(".form");
 const placeTitle = formPlaceCreation.querySelector(".form__input_title");
 const placeUrl = formPlaceCreation.querySelector(".form__input_subtitle");
 
@@ -23,7 +23,7 @@ const editButton = document.querySelector(".edit-button");
 
 // Поп-ап редактирования профиля
 const popupEdit = document.querySelector(".popup_edit");
-const formEditProfile = document.getElementsByName("edit-profile")[0];
+const formEditProfile = popupEdit.querySelector(".form");
 const closeEditPopupButton = popupEdit.querySelector(".popup__close");
 const nameInput = formEditProfile.querySelector(".form__input_title");
 const jobInput = formEditProfile.querySelector(".form__input_subtitle");
