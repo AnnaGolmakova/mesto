@@ -31,15 +31,6 @@ function handleLike (evt) {
   evt.target.classList.toggle('card__like-button_active');
 }
 
-function openPreview (place) {
-  page.style.overflow = "hidden";
-  popupPreview.classList.add("popup_opened");
-  popupPreview.setAttribute('aria-hidden', 'false');
-  popupPreview.querySelector('.popup__image').src = place.link;
-  popupPreview.querySelector('.popup__image').alt = place.name;
-  popupPreview.querySelector('.popup__caption').textContent = place.name;
-}
-
 const page = document.querySelector("body");
 const popupEdit = document.querySelector(".popup_edit");
 const popupAdd = document.querySelector(".popup_add");
@@ -59,6 +50,18 @@ function openEditPopup(evt) {
   page.style.overflow = "hidden";
   popupEdit.classList.add("popup_opened");
   popupEdit.setAttribute('aria-hidden', 'false');
+
+// Обработчики открытия попапа
+
+function openPreview (place) {
+  page.style.overflow = "hidden";
+  popupPreview.classList.add("popup_opened");
+  popupPreview.setAttribute('aria-hidden', 'false');
+  popupPreview.querySelector('.popup__image').src = place.link;
+  popupPreview.querySelector('.popup__image').alt = place.name;
+  popupPreview.querySelector('.popup__caption').textContent = place.name;
+}
+
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
 }
