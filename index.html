@@ -37,8 +37,8 @@
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <form name="edit-profile" class="form">
-        <input type="text" name="name" class="form__input form__input_title" placeholder="Имя">
-        <input type="text" name="job" class="form__input form__input_subtitle" placeholder="О себе">
+        <input type="text" name="name" class="form__input form__input_title" placeholder="Имя" required minlength="2" maxlength="40">
+        <input type="text" name="job" class="form__input form__input_subtitle" placeholder="О себе" required minlength="2" maxlength="200">
         <button type="submit" class="form__save-button">Сохранить</button>
       </form>
       <button type="button" class="popup__close"></button>
@@ -48,8 +48,8 @@
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
       <form name="create-place" class="form">
-        <input type="text" name="name" class="form__input form__input_title" placeholder="Название">
-        <input type="text" name="url" class="form__input form__input_subtitle" placeholder="Ссылка на картинку">
+        <input type="text" name="name" class="form__input form__input_title" placeholder="Название" required minlength="2" maxlength="30">
+        <input type="url" name="url" class="form__input form__input_subtitle" placeholder="Ссылка на картинку" required>
         <button type="submit" class="form__save-button">Создать</button>
       </form>
       <button type="button" class="popup__close"></button>
