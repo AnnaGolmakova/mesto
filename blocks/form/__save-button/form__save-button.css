@@ -25,3 +25,11 @@
 .form__save-button:hover {
   opacity: 0.8;
 }
+
+.form__save-button:disabled {
+  background-color: #FFFFFF;
+  opacity: 0.2;
+  color: #000000;
+  border: 1px solid rgba(0, 0, 0, 1);
+  cursor: none;
+}
