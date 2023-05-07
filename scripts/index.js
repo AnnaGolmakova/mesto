@@ -39,15 +39,16 @@ const popupCaption = popupPreview.querySelector('.popup__caption');
 // Создание карточек
 function createCard(place) {
   const card = cardTemplate.cloneNode(true);
+  const cardImage = card.querySelector('.card__image');
 
-  card.querySelector('.card__image').src = place.link;
-  card.querySelector('.card__image').alt = place.name;
+  cardImage.src = place.link;
+  cardImage.alt = place.name;
   card.querySelector('.card__title').textContent = place.name;
   card.querySelector('.card__like-button').addEventListener("click", handleLike);
   card.querySelector('.card__delete-button').addEventListener("click", () => {
     deleteCard(card);
   });
-  card.querySelector('.card__image').addEventListener("click", () => {
+  cardImage.addEventListener("click", () => {
     openPreview(place);
   });
 
@@ -72,21 +73,7 @@ function handleLike (evt) {
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
   popupElement.setAttribute('aria-hidden', 'false');
-  page.style.overflow = "hidden";
-
-  popupElement.addEventListener("click", function closeOnOutclick(evt) {
-    if (evt.target === popupElement) {
-      closePopup(popupElement)
-      popupElement.removeEventListener("click", closeOnOutclick)
-    }
-  });
-
-  window.addEventListener("keydown", function closeOnEsc(evt) {
-    if (evt.key === 'Escape') {
-      closePopup(popupElement)
-      window.removeEventListener("keydown", closeOnEsc)
-    }
-  });
+  window.addEventListener("keydown", closeOnEsc);
 }
 
 function openPreview(place) {
@@ -105,8 +92,7 @@ editButton.addEventListener("click", openEditPopup);
 
 function openAddPopup(evt) {
   openPopup(popupAdd);
-  placeTitle.value = "";
-  placeUrl.value = "";
+  formPlaceCreation.reset()
   popupAddSubmitButton.disabled = true;
 }
 addButton.addEventListener("click", openAddPopup);
@@ -114,10 +100,24 @@ addButton.addEventListener("click", openAddPopup);
 
 // Обработчик закрытия попапа
 function closePopup(popupElement) {
-  page.style.removeProperty("overflow");
   popupElement.setAttribute('aria-hidden', 'true');
   popupElement.classList.remove("popup_opened");
+  window.removeEventListener("keydown", closeOnEsc);
 }
+
+function closeOnEsc(evt) {
+  if (evt.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'));
+  }
+}
+
+[popupAdd, popupEdit, popupPreview].forEach((popup) => {
+  popup.addEventListener("click", (evt) => {
+    if (evt.target === popup) {
+      closePopup(popup)
+    }
+  });
+})
 
 closePreviewButton.addEventListener("click", () => {
   closePopup(popupPreview)
