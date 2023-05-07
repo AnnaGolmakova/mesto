@@ -31,5 +31,5 @@
   opacity: 0.2;
   color: #000000;
   border: 1px solid rgba(0, 0, 0, 1);
-  cursor: none;
+  cursor: unset;
 }

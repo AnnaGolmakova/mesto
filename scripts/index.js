@@ -13,6 +13,7 @@ const addButton = document.querySelector(".add-button");
 
 // Поп-ап добавления места
 const popupAdd = document.querySelector(".popup_add");
+const popupAddSubmitButton = popupAdd.querySelector(".form__save-button");
 const closeAddPopupButton = popupAdd.querySelector(".popup__close");
 const formPlaceCreation = popupAdd.querySelector(".form");
 const placeTitle = formPlaceCreation.querySelector(".form__input_title");
@@ -72,6 +73,20 @@ function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
   popupElement.setAttribute('aria-hidden', 'false');
   page.style.overflow = "hidden";
+
+  popupElement.addEventListener("click", function closeOnOutclick(evt) {
+    if (evt.target === popupElement) {
+      closePopup(popupElement)
+      popupElement.removeEventListener("click", closeOnOutclick)
+    }
+  });
+
+  window.addEventListener("keydown", function closeOnEsc(evt) {
+    if (evt.key === 'Escape') {
+      closePopup(popupElement)
+      window.removeEventListener("keydown", closeOnEsc)
+    }
+  });
 }
 
 function openPreview(place) {
@@ -92,6 +107,7 @@ function openAddPopup(evt) {
   openPopup(popupAdd);
   placeTitle.value = "";
   placeUrl.value = "";
+  popupAddSubmitButton.disabled = true;
 }
 addButton.addEventListener("click", openAddPopup);
 
@@ -120,19 +136,6 @@ closeAddPopupButton.addEventListener("click", () => {
 function handleProfileFormSubmit (evt) {
   evt.preventDefault();
 
-  if (nameInput.value.length === 0 && jobInput.value.length === 0) {
-    alert("Заполните имя и должность");
-    return;
-  }
-  if (jobInput.value.length === 0) {
-    alert("Заполните должность");
-    return;
-  }
-  if (nameInput.value.length === 0) {
-    alert("Заполните имя");
-    return;
-  }
-
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = jobInput.value;
   closePopup(popupEdit);
@@ -144,19 +147,6 @@ formEditProfile.addEventListener('submit', handleProfileFormSubmit);
 //Обработчик создания карточки
 function handleCardCreate (evt) {
   evt.preventDefault();
-
-  if (placeTitle.value.length === 0 && placeUrl.value.length === 0) {
-    alert("Заполните название и добавьте ссылку");
-    return;
-  }
-  if (placeUrl.value.length === 0) {
-    alert("Добавьте ссылку");
-    return;
-  }
-  if (placeTitle.value.length === 0) {
-    alert("Заполните название");
-    return;
-  }
 
   cardsList.prepend(createCard({
     name: placeTitle.value,
