@@ -1,4 +1,4 @@
-const page = document.querySelector("body");
+import FormValidator from './FormValidator.js';
 
 // Профиль на странице
 const profileTitle = document.querySelector(".profile__info-title");
@@ -156,3 +156,12 @@ function handleCardCreate (evt) {
 }
 
 formPlaceCreation.addEventListener('submit', handleCardCreate);
+
+const formValidator = new FormValidator({
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__save-button',
+  inactiveButtonClass: 'form__save-button_disabled',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_visible'
+});
