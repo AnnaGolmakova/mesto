@@ -157,11 +157,22 @@ function handleCardCreate (evt) {
 
 formPlaceCreation.addEventListener('submit', handleCardCreate);
 
-const formValidator = new FormValidator({
-  formSelector: '.form',
+const formPlaceValidator = new FormValidator({
   inputSelector: '.form__input',
   submitButtonSelector: '.form__save-button',
   inactiveButtonClass: 'form__save-button_disabled',
   inputErrorClass: 'form__input_type_error',
   errorClass: 'form__input-error_visible'
-});
+}, formPlaceCreation);
+
+formPlaceValidator.enableValidation()
+
+const formEditValidator = new FormValidator({
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__save-button',
+  inactiveButtonClass: 'form__save-button_disabled',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_visible'
+}, formEditProfile);
+
+formEditValidator.enableValidation()
