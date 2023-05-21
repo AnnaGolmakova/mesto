@@ -1,12 +1,12 @@
+import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
 // Профиль на странице
 const profileTitle = document.querySelector(".profile__info-title");
 const profileSubtitle = document.querySelector(".profile__info-subtitle");
 
-// Список карточек и их шаблон
+// Список карточек
 const cardsList = document.querySelector('.cards');
-const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
 
 // Кнопка добавления места
 const addButton = document.querySelector(".add-button");
@@ -37,35 +37,10 @@ const popupCaption = popupPreview.querySelector('.popup__caption');
 
 
 // Создание карточек
-function createCard(place) {
-  const card = cardTemplate.cloneNode(true);
-  const cardImage = card.querySelector('.card__image');
-
-  cardImage.src = place.link;
-  cardImage.alt = place.name;
-  card.querySelector('.card__title').textContent = place.name;
-  card.querySelector('.card__like-button').addEventListener("click", handleLike);
-  card.querySelector('.card__delete-button').addEventListener("click", () => {
-    deleteCard(card);
-  });
-  cardImage.addEventListener("click", () => {
-    openPreview(place);
-  });
-
-  return card;
-}
-
 initialCards.forEach((place) => {
-  cardsList.append(createCard(place));
+  const cardElement = new Card(place.name, place.link);
+  cardsList.append(cardElement.generateCard());
 });
-
-function deleteCard(card) {
-  card.remove();
-}
-
-function handleLike (evt) {
-  evt.target.classList.toggle('card__like-button_active');
-}
 
 
 // Обработчики открытия попапа
@@ -76,12 +51,13 @@ function openPopup(popupElement) {
   window.addEventListener("keydown", closeOnEsc);
 }
 
-function openPreview(place) {
+function openPreview(evt) {
   openPopup(popupPreview);
-  popupImage.src = place.link;
-  popupImage.alt = place.name;
-  popupCaption.textContent = place.name;
+  popupImage.src = evt.detail.link;
+  popupImage.alt = evt.detail.name;
+  popupCaption.textContent = evt.detail.name;
 }
+cardsList.addEventListener("openPreview", openPreview)
 
 function openEditPopup(evt) {
   openPopup(popupEdit);
@@ -133,7 +109,7 @@ closeAddPopupButton.addEventListener("click", () => {
 
 
 // Обработчик отправки формы профиля
-function handleProfileFormSubmit (evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
   profileTitle.textContent = nameInput.value;
@@ -145,13 +121,12 @@ formEditProfile.addEventListener('submit', handleProfileFormSubmit);
 
 
 //Обработчик создания карточки
-function handleCardCreate (evt) {
+function handleCardCreate(evt) {
   evt.preventDefault();
 
-  cardsList.prepend(createCard({
-    name: placeTitle.value,
-    link: placeUrl.value
-  }));
+  const cardElement = new Card(placeTitle.value, placeUrl.value);
+  cardsList.prepend(cardElement.generateCard());
+
   closePopup(popupAdd);
 }
 
@@ -167,7 +142,7 @@ const formPlaceValidator = new FormValidator({
 
 formPlaceValidator.enableValidation()
 
-const formEditValidator = new FormValidator({
+const formEditProfileValidator = new FormValidator({
   inputSelector: '.form__input',
   submitButtonSelector: '.form__save-button',
   inactiveButtonClass: 'form__save-button_disabled',
@@ -175,4 +150,4 @@ const formEditValidator = new FormValidator({
   errorClass: 'form__input-error_visible'
 }, formEditProfile);
 
-formEditValidator.enableValidation()
+formEditProfileValidator.enableValidation()
