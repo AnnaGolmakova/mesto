@@ -38,7 +38,7 @@ const popupCaption = popupPreview.querySelector('.popup__caption');
 
 // Создание карточек
 initialCards.forEach((place) => {
-  const cardElement = new Card(place.name, place.link);
+  const cardElement = new Card(place.name, place.link, openPreview);
   cardsList.append(cardElement.generateCard());
 });
 
@@ -51,13 +51,12 @@ function openPopup(popupElement) {
   window.addEventListener("keydown", closeOnEsc);
 }
 
-function openPreview(evt) {
+function openPreview(name, link) {
   openPopup(popupPreview);
-  popupImage.src = evt.detail.link;
-  popupImage.alt = evt.detail.name;
-  popupCaption.textContent = evt.detail.name;
+  popupImage.src = link;
+  popupImage.alt = name;
+  popupCaption.textContent = name;
 }
-cardsList.addEventListener("openPreview", openPreview)
 
 function openEditPopup(evt) {
   openPopup(popupEdit);
@@ -124,7 +123,7 @@ formEditProfile.addEventListener('submit', handleProfileFormSubmit);
 function handleCardCreate(evt) {
   evt.preventDefault();
 
-  const cardElement = new Card(placeTitle.value, placeUrl.value);
+  const cardElement = new Card(placeTitle.value, placeUrl.value, openPreview);
   cardsList.prepend(cardElement.generateCard());
 
   closePopup(popupAdd);
