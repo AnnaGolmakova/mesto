@@ -79,6 +79,19 @@ addButton.addEventListener("click", openAddPopup);
 
 
 // Обработчик закрытия попапа
+const popups = document.querySelectorAll('.popup')
+
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopup(popup)
+    }
+    if (evt.target.classList.contains('popup__close')) {
+      closePopup(popup)
+    }
+  })
+})
+
 function closePopup(popupElement) {
   popupElement.setAttribute('aria-hidden', 'true');
   popupElement.classList.remove("popup_opened");
@@ -90,27 +103,6 @@ function closeOnEsc(evt) {
     closePopup(document.querySelector('.popup_opened'));
   }
 }
-
-[popupAdd, popupEdit, popupPreview].forEach((popup) => {
-  popup.addEventListener("click", (evt) => {
-    if (evt.target === popup) {
-      closePopup(popup)
-    }
-  });
-})
-
-closePreviewButton.addEventListener("click", () => {
-  closePopup(popupPreview)
-});
-
-closeEditPopupButton.addEventListener("click", () => {
-  closePopup(popupEdit)
-});
-
-closeAddPopupButton.addEventListener("click", () => {
-  closePopup(popupAdd)
-});
-
 
 // Обработчик отправки формы профиля
 function handleProfileFormSubmit(evt) {
