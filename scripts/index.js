@@ -15,7 +15,7 @@ const addButton = document.querySelector(".add-button");
 const popupAdd = document.querySelector(".popup_add");
 const popupAddSubmitButton = popupAdd.querySelector(".form__save-button");
 const closeAddPopupButton = popupAdd.querySelector(".popup__close");
-const formPlaceCreation = popupAdd.querySelector(".form");
+const formPlaceCreation = document.forms["create-place"];
 const placeTitle = formPlaceCreation.querySelector(".form__input_title");
 const placeUrl = formPlaceCreation.querySelector(".form__input_subtitle");
 
@@ -24,7 +24,7 @@ const editButton = document.querySelector(".edit-button");
 
 // Поп-ап редактирования профиля
 const popupEdit = document.querySelector(".popup_edit");
-const formEditProfile = popupEdit.querySelector(".form");
+const formEditProfile = document.forms["edit-profile"];
 const closeEditPopupButton = popupEdit.querySelector(".popup__close");
 const nameInput = formEditProfile.querySelector(".form__input_title");
 const jobInput = formEditProfile.querySelector(".form__input_subtitle");
@@ -37,9 +37,13 @@ const popupCaption = popupPreview.querySelector('.popup__caption');
 
 
 // Создание карточек
+function createCard(name, link) {
+  const cardElement = new Card(name, link, openPreview);
+  return cardElement.generateCard();
+}
+
 initialCards.forEach((place) => {
-  const cardElement = new Card(place.name, place.link, openPreview);
-  cardsList.append(cardElement.generateCard());
+  cardsList.append(createCard(place.name, place.link));
 });
 
 
@@ -70,7 +74,6 @@ function openAddPopup(evt) {
   formPlaceValidator.resetValidation();
   openPopup(popupAdd);
   formPlaceCreation.reset()
-  popupAddSubmitButton.disabled = true;
 }
 addButton.addEventListener("click", openAddPopup);
 
@@ -125,8 +128,7 @@ formEditProfile.addEventListener('submit', handleProfileFormSubmit);
 function handleCardCreate(evt) {
   evt.preventDefault();
 
-  const cardElement = new Card(placeTitle.value, placeUrl.value, openPreview);
-  cardsList.prepend(cardElement.generateCard());
+  cardsList.prepend(createCard(placeTitle.value, placeUrl.value));
 
   closePopup(popupAdd);
 }
