@@ -59,6 +59,7 @@ function openPreview(name, link) {
 }
 
 function openEditPopup(evt) {
+  formEditProfileValidator.resetValidation();
   openPopup(popupEdit);
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
@@ -66,6 +67,7 @@ function openEditPopup(evt) {
 editButton.addEventListener("click", openEditPopup);
 
 function openAddPopup(evt) {
+  formPlaceValidator.resetValidation();
   openPopup(popupAdd);
   formPlaceCreation.reset()
   popupAddSubmitButton.disabled = true;

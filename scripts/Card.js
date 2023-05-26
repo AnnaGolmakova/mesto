@@ -5,13 +5,6 @@ class Card {
     this._handleCardClick = handleCardClick;
     this.liked = liked;
     this.templateSelector = templateSelector;
-    this.eventOpenPreview = new CustomEvent("openPreview", {
-      bubbles: true,
-      detail: {
-        name: this.title,
-        link: this.imageUrl
-      }
-    });
   }
 
   _getTemplate() {
