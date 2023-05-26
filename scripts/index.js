@@ -92,9 +92,9 @@ function openEditPopup(evt) {
 editButton.addEventListener("click", openEditPopup);
 
 function openAddPopup(evt) {
+  formPlaceCreation.reset();
   formValidators["create-place"].resetValidation();
   openPopup(popupAdd);
-  formPlaceCreation.reset()
 }
 addButton.addEventListener("click", openAddPopup);
 
