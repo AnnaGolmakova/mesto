@@ -35,6 +35,15 @@ const closePreviewButton = popupPreview.querySelector(".popup__close");
 const popupImage = popupPreview.querySelector('.popup__image');
 const popupCaption = popupPreview.querySelector('.popup__caption');
 
+// Параметры валидации
+const validationParams = {
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__save-button',
+  inactiveButtonClass: 'form__save-button_disabled',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_visible'
+}
+
 
 // Создание карточек
 function createCard(name, link) {
@@ -127,22 +136,10 @@ function handleCardCreate(evt) {
 
 formPlaceCreation.addEventListener('submit', handleCardCreate);
 
-const formPlaceValidator = new FormValidator({
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__save-button',
-  inactiveButtonClass: 'form__save-button_disabled',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'form__input-error_visible'
-}, formPlaceCreation);
+const formPlaceValidator = new FormValidator(validationParams, formPlaceCreation);
 
 formPlaceValidator.enableValidation()
 
-const formEditProfileValidator = new FormValidator({
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__save-button',
-  inactiveButtonClass: 'form__save-button_disabled',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'form__input-error_visible'
-}, formEditProfile);
+const formEditProfileValidator = new FormValidator(validationParams, formEditProfile);
 
 formEditProfileValidator.enableValidation()
