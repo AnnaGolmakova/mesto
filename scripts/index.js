@@ -13,8 +13,6 @@ const addButton = document.querySelector(".add-button");
 
 // Поп-ап добавления места
 const popupAdd = document.querySelector(".popup_add");
-const popupAddSubmitButton = popupAdd.querySelector(".form__save-button");
-const closeAddPopupButton = popupAdd.querySelector(".popup__close");
 const formPlaceCreation = document.forms["create-place"];
 const placeTitle = formPlaceCreation.querySelector(".form__input_title");
 const placeUrl = formPlaceCreation.querySelector(".form__input_subtitle");
@@ -25,24 +23,38 @@ const editButton = document.querySelector(".edit-button");
 // Поп-ап редактирования профиля
 const popupEdit = document.querySelector(".popup_edit");
 const formEditProfile = document.forms["edit-profile"];
-const closeEditPopupButton = popupEdit.querySelector(".popup__close");
 const nameInput = formEditProfile.querySelector(".form__input_title");
 const jobInput = formEditProfile.querySelector(".form__input_subtitle");
 
 // Поп-ап просмотра картинок
-const popupPreview = document.querySelector(".popup_preview")
-const closePreviewButton = popupPreview.querySelector(".popup__close");
+const popupPreview = document.querySelector(".popup_preview");
 const popupImage = popupPreview.querySelector('.popup__image');
 const popupCaption = popupPreview.querySelector('.popup__caption');
 
 // Параметры валидации
 const validationParams = {
+  formSelector: '.form',
   inputSelector: '.form__input',
   submitButtonSelector: '.form__save-button',
   inactiveButtonClass: 'form__save-button_disabled',
   inputErrorClass: 'form__input_type_error',
   errorClass: 'form__input-error_visible'
 }
+
+const formValidators = {}
+
+const enableValidation = (validationParams) => {
+  const formList = Array.from(document.querySelectorAll(validationParams.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(validationParams, formElement);
+    const formName = formElement.getAttribute('name');
+
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(validationParams);
 
 
 // Создание карточек
@@ -72,7 +84,7 @@ function openPreview(name, link) {
 }
 
 function openEditPopup(evt) {
-  formEditProfileValidator.resetValidation();
+  formValidators["edit-profile"].resetValidation();
   openPopup(popupEdit);
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
@@ -80,7 +92,7 @@ function openEditPopup(evt) {
 editButton.addEventListener("click", openEditPopup);
 
 function openAddPopup(evt) {
-  formPlaceValidator.resetValidation();
+  formValidators["create-place"].resetValidation();
   openPopup(popupAdd);
   formPlaceCreation.reset()
 }
@@ -135,11 +147,3 @@ function handleCardCreate(evt) {
 }
 
 formPlaceCreation.addEventListener('submit', handleCardCreate);
-
-const formPlaceValidator = new FormValidator(validationParams, formPlaceCreation);
-
-formPlaceValidator.enableValidation()
-
-const formEditProfileValidator = new FormValidator(validationParams, formEditProfile);
-
-formEditProfileValidator.enableValidation()
