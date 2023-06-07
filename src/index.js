@@ -1,14 +1,13 @@
 import initialCards from './scripts/constants.js';
 import Card from './components/Card.js';
 import FormValidator from './components/FormValidator.js';
+import Section from './components/Section.js';
 import './pages/index.css';
+
 
 // Профиль на странице
 const profileTitle = document.querySelector(".profile__info-title");
 const profileSubtitle = document.querySelector(".profile__info-subtitle");
-
-// Список карточек
-const cardsList = document.querySelector('.cards');
 
 // Кнопка добавления места
 const addButton = document.querySelector(".add-button");
@@ -60,14 +59,17 @@ enableValidation(validationParams);
 
 
 // Создание карточек
-function createCard(name, link) {
-  const cardElement = new Card(name, link, openPreview);
+function createCard(place) {
+  const cardElement = new Card(place.name, place.link, openPreview);
   return cardElement.generateCard();
 }
 
-initialCards.forEach((place) => {
-  cardsList.append(createCard(place.name, place.link));
+const cardsList = new Section({
+  items: initialCards,
+  renderer: createCard
 });
+
+cardsList.renderItems();
 
 
 // Обработчики открытия попапа
@@ -143,7 +145,10 @@ formEditProfile.addEventListener('submit', handleProfileFormSubmit);
 function handleCardCreate(evt) {
   evt.preventDefault();
 
-  cardsList.prepend(createCard(placeTitle.value, placeUrl.value));
+  cardsList.setItem({
+    name: placeTitle.value,
+    link: placeUrl.value
+  }, true);
 
   closePopup(popupAdd);
 }
