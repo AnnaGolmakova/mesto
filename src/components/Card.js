@@ -1,3 +1,13 @@
+/**
+ * Card for some place.
+ * @constructor
+ * @param {string} title - Name of the place on card.
+ * @param {string} imageUrl - URL for the image.
+ * @param {function} handleCardClick - Callback for openning preview.
+ * @param {boolean} liked - Like button state.
+ * @param {string} templateSelector - Selector for html template.
+ */
+
 class Card {
   constructor(title, imageUrl, handleCardClick, liked = false, templateSelector = '#card-template') {
     this.title = title;

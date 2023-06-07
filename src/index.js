@@ -1,5 +1,7 @@
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
+import initialCards from './scripts/constants.js';
+import Card from './components/Card.js';
+import FormValidator from './components/FormValidator.js';
+import './pages/index.css';
 
 // Профиль на странице
 const profileTitle = document.querySelector(".profile__info-title");
