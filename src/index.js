@@ -2,6 +2,7 @@ import initialCards from './scripts/constants.js';
 import Card from './components/Card.js';
 import FormValidator from './components/FormValidator.js';
 import Section from './components/Section.js';
+import Popup from './components/Popup.js';
 import './pages/index.css';
 
 
@@ -74,11 +75,7 @@ cardsList.renderItems();
 
 // Обработчики открытия попапа
 
-function openPopup(popupElement) {
-  popupElement.classList.add('popup_opened');
-  popupElement.setAttribute('aria-hidden', 'false');
-  window.addEventListener("keydown", closeOnEsc);
-}
+const editPopup = new Popup(".popup_edit");
 
 function openPreview(name, link) {
   openPopup(popupPreview);
@@ -89,7 +86,7 @@ function openPreview(name, link) {
 
 function openEditPopup(evt) {
   formValidators["edit-profile"].resetValidation();
-  openPopup(popupEdit);
+  editPopup.open();
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
 }
@@ -101,33 +98,6 @@ function openAddPopup(evt) {
   openPopup(popupAdd);
 }
 addButton.addEventListener("click", openAddPopup);
-
-
-// Обработчик закрытия попапа
-const popups = document.querySelectorAll('.popup')
-
-popups.forEach((popup) => {
-  popup.addEventListener('mousedown', (evt) => {
-    if (evt.target.classList.contains('popup_opened')) {
-      closePopup(popup)
-    }
-    if (evt.target.classList.contains('popup__close')) {
-      closePopup(popup)
-    }
-  })
-})
-
-function closePopup(popupElement) {
-  popupElement.setAttribute('aria-hidden', 'true');
-  popupElement.classList.remove("popup_opened");
-  window.removeEventListener("keydown", closeOnEsc);
-}
-
-function closeOnEsc(evt) {
-  if (evt.key === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'));
-  }
-}
 
 // Обработчик отправки формы профиля
 function handleProfileFormSubmit(evt) {
