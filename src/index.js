@@ -2,7 +2,8 @@ import initialCards from './scripts/constants.js';
 import Card from './components/Card.js';
 import FormValidator from './components/FormValidator.js';
 import Section from './components/Section.js';
-import Popup from './components/Popup.js';
+import PopupWithImage from './components/PopupWithImage.js';
+import PopupWithForm from './components/PopupWithForm.js';
 import './pages/index.css';
 
 
@@ -13,25 +14,14 @@ const profileSubtitle = document.querySelector(".profile__info-subtitle");
 // Кнопка добавления места
 const addButton = document.querySelector(".add-button");
 
-// Поп-ап добавления места
-const popupAdd = document.querySelector(".popup_add");
-const formPlaceCreation = document.forms["create-place"];
-const placeTitle = formPlaceCreation.querySelector(".form__input_title");
-const placeUrl = formPlaceCreation.querySelector(".form__input_subtitle");
-
 // Кнопка редактирования профиля
 const editButton = document.querySelector(".edit-button");
 
-// Поп-ап редактирования профиля
-const popupEdit = document.querySelector(".popup_edit");
+// Форма редактирования профиля
 const formEditProfile = document.forms["edit-profile"];
 const nameInput = formEditProfile.querySelector(".form__input_title");
 const jobInput = formEditProfile.querySelector(".form__input_subtitle");
 
-// Поп-ап просмотра картинок
-const popupPreview = document.querySelector(".popup_preview");
-const popupImage = popupPreview.querySelector('.popup__image');
-const popupCaption = popupPreview.querySelector('.popup__caption');
 
 // Параметры валидации
 const validationParams = {
@@ -61,7 +51,9 @@ enableValidation(validationParams);
 
 // Создание карточек
 function createCard(place) {
-  const cardElement = new Card(place.name, place.link, openPreview);
+  const cardElement = new Card(place.name, place.link, () => {
+    previewPopup.open(place.name, place.link)
+  });
   return cardElement.generateCard();
 }
 
@@ -73,54 +65,29 @@ const cardsList = new Section({
 cardsList.renderItems();
 
 
-// Обработчики открытия попапа
-
-const editPopup = new Popup(".popup_edit");
-
-function openPreview(name, link) {
-  openPopup(popupPreview);
-  popupImage.src = link;
-  popupImage.alt = name;
-  popupCaption.textContent = name;
-}
+// Поп-апы
+const previewPopup = new PopupWithImage();
+const addPopup = new PopupWithForm('.popup_add', (values) => {
+  cardsList.setItem({
+    name: values.name,
+    link: values.url
+  }, true);
+});
+const editPopup = new PopupWithForm('.popup_edit', (values) => {
+  profileTitle.textContent = values.name;
+  profileSubtitle.textContent = values.job;
+});
 
 function openEditPopup(evt) {
   formValidators["edit-profile"].resetValidation();
-  editPopup.open();
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
+  editPopup.open();
 }
 editButton.addEventListener("click", openEditPopup);
 
 function openAddPopup(evt) {
-  formPlaceCreation.reset();
   formValidators["create-place"].resetValidation();
-  openPopup(popupAdd);
+  addPopup.open();
 }
 addButton.addEventListener("click", openAddPopup);
-
-// Обработчик отправки формы профиля
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-
-  profileTitle.textContent = nameInput.value;
-  profileSubtitle.textContent = jobInput.value;
-  closePopup(popupEdit);
-}
-
-formEditProfile.addEventListener('submit', handleProfileFormSubmit);
-
-
-//Обработчик создания карточки
-function handleCardCreate(evt) {
-  evt.preventDefault();
-
-  cardsList.setItem({
-    name: placeTitle.value,
-    link: placeUrl.value
-  }, true);
-
-  closePopup(popupAdd);
-}
-
-formPlaceCreation.addEventListener('submit', handleCardCreate);
