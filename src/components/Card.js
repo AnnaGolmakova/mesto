@@ -3,7 +3,7 @@
  * @constructor
  * @param {string} title - Name of the place on card.
  * @param {string} imageUrl - URL for the image.
- * @param {function} handleCardClick - Callback for openning preview.
+ * @param {function} handleCardClick - Callback for opening preview.
  * @param {boolean} liked - Like button state.
  * @param {string} templateSelector - Selector for html template.
  */

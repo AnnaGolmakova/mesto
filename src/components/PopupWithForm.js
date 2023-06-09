@@ -1,5 +1,12 @@
 import Popup from './Popup.js';
 
+/**
+ * Popup with form
+ * @constructor
+ * @param {string} selector - Selector for an html element.
+ * @param {function} submitCallback - Callback for handling of a form submit.
+ */
+
 class PopupWithForm extends Popup {
   constructor(selector, submitCallback) {
     super(selector);

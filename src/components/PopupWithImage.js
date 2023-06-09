@@ -1,5 +1,11 @@
 import Popup from './Popup.js';
 
+/**
+ * Popup for image preview
+ * @constructor
+ * @param {string} selector - Selector for an html element.
+ */
+
 class popupWithImage extends Popup {
   constructor(selector = '.popup_preview') {
     super(selector);

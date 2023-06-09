@@ -1,3 +1,9 @@
+/**
+ * Popup
+ * @constructor
+ * @param {string} selector - Selector for an html element.
+ */
+
 class Popup {
   constructor(selector) {
     this.popupElement = document.querySelector(selector);
