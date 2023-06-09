@@ -2,7 +2,6 @@ class Popup {
   constructor(selector) {
     this.popupElement = document.querySelector(selector);
     this.closeButton = this.popupElement.querySelector('.popup__close');
-    this.setEventListeners();
     this.isOpened = false;
   }
 
@@ -15,7 +14,6 @@ class Popup {
 
   close() {
     this.isOpened = false;
-    console.log()
     this.popupElement.setAttribute('aria-hidden', 'true');
     this.popupElement.classList.remove("popup_opened");
     window.removeEventListener("keydown", this._handleEscClose);

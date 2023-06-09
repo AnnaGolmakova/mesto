@@ -4,12 +4,10 @@ import FormValidator from './components/FormValidator.js';
 import Section from './components/Section.js';
 import PopupWithImage from './components/PopupWithImage.js';
 import PopupWithForm from './components/PopupWithForm.js';
+import UserInfo from './components/UserInfo.js';
 import './pages/index.css';
 
-
-// Профиль на странице
-const profileTitle = document.querySelector(".profile__info-title");
-const profileSubtitle = document.querySelector(".profile__info-subtitle");
+const profile = new UserInfo('Жак-Ив Кусто', 'Исследователь океана');
 
 // Кнопка добавления места
 const addButton = document.querySelector(".add-button");
@@ -67,21 +65,22 @@ cardsList.renderItems();
 
 // Поп-апы
 const previewPopup = new PopupWithImage();
+
 const addPopup = new PopupWithForm('.popup_add', (values) => {
   cardsList.setItem({
     name: values.name,
     link: values.url
   }, true);
 });
+
 const editPopup = new PopupWithForm('.popup_edit', (values) => {
-  profileTitle.textContent = values.name;
-  profileSubtitle.textContent = values.job;
+  profile.setUserInfo(values.name, values.job);
 });
 
 function openEditPopup(evt) {
   formValidators["edit-profile"].resetValidation();
-  nameInput.value = profileTitle.textContent;
-  jobInput.value = profileSubtitle.textContent;
+  nameInput.value = profile.name;
+  jobInput.value = profile.job;
   editPopup.open();
 }
 editButton.addEventListener("click", openEditPopup);
