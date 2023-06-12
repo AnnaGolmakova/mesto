@@ -13,6 +13,9 @@
 * CSS-анимации
 * Figma
 * JavaScript
+* ES6 Modules
+* Webpack
+* ООП
 
 ## Ссылка на GitHub Pages:
 https://annagolmakova.github.io/mesto/

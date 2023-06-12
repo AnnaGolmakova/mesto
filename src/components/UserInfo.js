@@ -1,31 +1,31 @@
 /**
  * Oтвечает за управление отображением информации о пользователе на странице
  * @constructor
- * @param {string} name - User's name.
- * @param {string} job - User's job title.
- * @param {string} selector - Selector for an html element.
+ * @param {Object} options - Selectors' settings.
+ * @param {string} options.profileSelector - Selector for a profile element.
+ * @param {string} options.nameSelector - Selector for a name element.
+ * @param {string} options.jobSelector - Selector for a job element.
  */
 
 class UserInfo {
-  constructor(name, job, selector = '.profile') {
-    this.profileElement = document.querySelector(selector);
-    this.nameElement = this.profileElement.querySelector('.profile__info-title');
-    this.jobElement = this.profileElement.querySelector('.profile__info-subtitle');
-    this.setUserInfo(name, job);
+  constructor(options) {
+    this._profileElement = document.querySelector(options.profileSelector);
+    this._nameElement = this._profileElement.querySelector(options.nameSelector);
+    this._jobElement = this._profileElement.querySelector(options.jobSelector);
   }
 
   getUserInfo() {
     return {
-      name: this.name,
-      job: this.job
+      name: this._name,
+      job: this._job
     }
   }
 
   setUserInfo(name, job) {
-    this.name = name;
-    this.job = job;
-    this.nameElement.textContent = this.name;
-    this.jobElement.textContent = this.job;
+    this._name = name;
+    this._job = job;
+    this._nameElement.textContent = this._name;
+    this._jobElement.textContent = this._job;
   }
 }
 

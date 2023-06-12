@@ -1,13 +1,14 @@
-import initialCards from './scripts/constants.js';
-import Card from './components/Card.js';
-import FormValidator from './components/FormValidator.js';
-import Section from './components/Section.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import UserInfo from './components/UserInfo.js';
-import './pages/index.css';
+import { initialCards, profileOptions, validationParams } from '../scripts/constants.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
+import './index.css';
 
-const profile = new UserInfo('Жак-Ив Кусто', 'Исследователь океана');
+const profile = new UserInfo(profileOptions);
+profile.setUserInfo('Жак-Ив Кусто', 'Исследователь океана');
 
 // Кнопка добавления места
 const addButton = document.querySelector(".add-button");
@@ -19,17 +20,6 @@ const editButton = document.querySelector(".edit-button");
 const formEditProfile = document.forms["edit-profile"];
 const nameInput = formEditProfile.querySelector(".form__input_title");
 const jobInput = formEditProfile.querySelector(".form__input_subtitle");
-
-
-// Параметры валидации
-const validationParams = {
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__save-button',
-  inactiveButtonClass: 'form__save-button_disabled',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'form__input-error_visible'
-}
 
 const formValidators = {}
 
@@ -79,8 +69,9 @@ const editPopup = new PopupWithForm('.popup_edit', (values) => {
 
 function openEditPopup(evt) {
   formValidators["edit-profile"].resetValidation();
-  nameInput.value = profile.name;
-  jobInput.value = profile.job;
+  const { name, job } = profile.getUserInfo()
+  nameInput.value = name;
+  jobInput.value = job;
   editPopup.open();
 }
 editButton.addEventListener("click", openEditPopup);

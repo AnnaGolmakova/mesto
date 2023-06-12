@@ -2,11 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  margin: 65px 0 0 0;
+  margin: 70px 0 0 0;
 }
 
 @media only screen and (min-width: 800px) {
   .form {
-    margin: 38px 0 0 0;
+    margin: 43px 0 0 0;
   }
 }

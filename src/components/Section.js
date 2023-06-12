@@ -15,15 +15,19 @@ class Section {
 
   renderItems() {
     this._initialArray.forEach((item) => {
-      this.setItem(item)
+      this.addItem(this._renderer(item))
     })
   }
 
   setItem(item, prepend = false) {
+    this.addItem(this._renderer(item), prepend)
+  }
+
+  addItem(item, prepend = false) {
     if (prepend) {
-      this._container.prepend(this._renderer(item));
+      this._container.prepend(item);
     } else {
-      this._container.append(this._renderer(item));
+      this._container.append(item);
     }
   }
 }
