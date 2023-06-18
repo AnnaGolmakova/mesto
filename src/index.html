@@ -15,7 +15,9 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img src="<%=require('./images/avatar.png')%>" class="profile__avatar" alt="Аватар">
+        <button type="button" class="avatar-button" aria-label="Обновить аватар">
+          <img src="<%=require('./images/avatar.png')%>" class="profile__avatar" alt="Аватар">
+        </button>
         <div class="profile__info">
           <div class="profile__info-editable">
             <h1 class="profile__info-title"></h1>
@@ -72,12 +74,36 @@
       <button type="button" class="popup__close"></button>
     </div>
   </div>
+  <div class="popup popup_update-avatar" aria-hidden="true">
+    <div class="popup__container">
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form name="update-avatar" class="form" novalidate>
+        <label class="form__field">
+          <input id="url-input" type="url" name="url" class="form__input form__input_subtitle"
+            placeholder="Ссылка на картинку" required>
+          <span class="form__input-error url-input-error"></span>
+        </label>
+        <button type="submit" class="form__save-button">Сохранить</button>
+      </form>
+      <button type="button" class="popup__close"></button>
+    </div>
+  </div>
+  <div class="popup popup_confirm" aria-hidden="true">
+    <div class="popup__container popup__container_confirm">
+      <h2 class="popup__title">Вы уверены?</h2>
+      <button type="submit" class="form__save-button">Да</button>
+      <button type="button" class="popup__close"></button>
+    </div>
+  </div>
   <template id="card-template">
     <li class="card">
       <img class="card__image">
       <div class="card__description">
         <h2 class="card__title"></h2>
-        <button type="button" class="card__like-button"><span aria-label="Лайк"></span></button>
+        <div class="card__like">
+          <button type="button" class="card__like-button"><span aria-label="Лайк"></span></button>
+          <div class="card__like-counter"></div>
+        </div>
       </div>
       <button type="button" class="card__delete-button"><span aria-label="Удалить"></span></button>
     </li>
