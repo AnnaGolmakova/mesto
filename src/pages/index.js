@@ -16,6 +16,9 @@ const addButton = document.querySelector(".add-button");
 // Кнопка редактирования профиля
 const editButton = document.querySelector(".edit-button");
 
+// Кнопка редактирования аватара
+const avatarButton = document.querySelector(".avatar-button");
+
 // Форма редактирования профиля
 const formEditProfile = document.forms["edit-profile"];
 const nameInput = formEditProfile.querySelector(".form__input_title");
@@ -67,6 +70,10 @@ const editPopup = new PopupWithForm('.popup_edit', (values) => {
   profile.setUserInfo(values.name, values.job);
 });
 
+const avatarPopup = new PopupWithForm('.popup_update-avatar', (values) => {
+  profile.setAvatar(values.url);
+});
+
 function openEditPopup(evt) {
   formValidators["edit-profile"].resetValidation();
   const { name, job } = profile.getUserInfo()
@@ -81,3 +88,9 @@ function openAddPopup(evt) {
   addPopup.open();
 }
 addButton.addEventListener("click", openAddPopup);
+
+function openAvatarPopup(evt) {
+  formValidators["update-avatar"].resetValidation();
+  avatarPopup.open();
+}
+avatarButton.addEventListener("click", openAvatarPopup);

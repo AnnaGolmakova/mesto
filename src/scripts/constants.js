@@ -28,7 +28,8 @@ const initialCards = [
 const profileOptions = {
   profileSelector: '.profile',
   nameSelector: '.profile__info-title',
-  jobSelector: '.profile__info-subtitle'
+  jobSelector: '.profile__info-subtitle',
+  avatarSelector: '.profile__avatar'
 }
 
 const validationParams = {
