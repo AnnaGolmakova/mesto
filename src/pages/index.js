@@ -5,10 +5,22 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/API.js';
 import './index.css';
 
+const api = new Api();
+
 const profile = new UserInfo(profileOptions);
-profile.setUserInfo('Жак-Ив Кусто', 'Исследователь океана');
+
+api.getUserInfo()
+  .then((result) => {
+    profile.setUserInfo(result.name, result.about);
+    profile.setAvatar(result.avatar);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 
 // Кнопка добавления места
 const addButton = document.querySelector(".add-button");

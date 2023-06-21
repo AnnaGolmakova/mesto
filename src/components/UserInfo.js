@@ -5,7 +5,7 @@
  * @param {string} options.profileSelector - Selector for a profile element.
  * @param {string} options.nameSelector - Selector for a name element.
  * @param {string} options.jobSelector - Selector for a job element.
- * @param {string} options.avatarSelector - Selector for an avatar
+ * @param {string} options.avatarSelector - Selector for avatar
  */
 
 class UserInfo {
