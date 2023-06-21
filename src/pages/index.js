@@ -83,7 +83,13 @@ const editPopup = new PopupWithForm('.popup_edit', (values) => {
 });
 
 const avatarPopup = new PopupWithForm('.popup_update-avatar', (values) => {
-  profile.setAvatar(values.url);
+  api.updateAvatar(values.url)
+    .then((result) => {
+      profile.setAvatar(values.url);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 function openEditPopup(evt) {
