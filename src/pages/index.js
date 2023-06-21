@@ -79,7 +79,13 @@ const addPopup = new PopupWithForm('.popup_add', (values) => {
 });
 
 const editPopup = new PopupWithForm('.popup_edit', (values) => {
-  profile.setUserInfo(values.name, values.job);
+  api.updateProfile(values.name, values.job)
+    .then((result) => {
+      profile.setUserInfo(values.name, values.job);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 const avatarPopup = new PopupWithForm('.popup_update-avatar', (values) => {
