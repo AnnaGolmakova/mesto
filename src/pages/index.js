@@ -1,4 +1,4 @@
-import { initialCards, profileOptions, validationParams } from '../scripts/constants.js';
+import { profileOptions, validationParams } from '../scripts/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
@@ -60,6 +60,14 @@ function createCard(place) {
   return cardElement.generateCard();
 }
 
+const initialCards = await api.getCards()
+  .then((result) => {
+    return result;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 const cardsList = new Section({
   items: initialCards,
   renderer: createCard
@@ -67,15 +75,20 @@ const cardsList = new Section({
 
 cardsList.renderItems();
 
-
 // Поп-апы
 const previewPopup = new PopupWithImage();
 
 const addPopup = new PopupWithForm('.popup_add', (values) => {
-  cardsList.setItem({
-    name: values.name,
-    link: values.url
-  }, true);
+  api.createCard(values.name, values.url)
+    .then((result) => {
+      cardsList.setItem({
+        name: values.name,
+        link: values.url
+      }, true);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 const editPopup = new PopupWithForm('.popup_edit', (values) => {
