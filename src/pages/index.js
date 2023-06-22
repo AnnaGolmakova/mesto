@@ -57,11 +57,13 @@ enableValidation(validationParams);
 // Создание карточек
 function createCard(place) {
   const cardElement = new Card(
-    place._id,
-    place.name,
-    place.link,
-    place.likes.length,
-    place.owner._id === profile.getUserInfo().id,
+    {
+      cardID: place._id,
+      title: place.name,
+      imageUrl: place.link,
+      liked: place.likes.length,
+      canBeDeleted: place.owner._id === profile.getUserInfo().id
+    },
     () => {
       previewPopup.open(place.name, place.link)
     },

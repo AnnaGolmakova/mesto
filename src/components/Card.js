@@ -9,12 +9,12 @@
  */
 
 class Card {
-  constructor(cardID, title, imageUrl, liked, canBeDeleted, handleCardClick, handleDelete, templateSelector = '#card-template') {
-    this._cardID = cardID;
-    this._title = title;
-    this._imageUrl = imageUrl;
-    this._liked = liked;
-    this._canBeDeleted = canBeDeleted;
+  constructor(place, handleCardClick, handleDelete, templateSelector = '#card-template') {
+    this._cardID = place.cardID;
+    this._title = place.title;
+    this._imageUrl = place.imageUrl;
+    this._liked = place.liked;
+    this._canBeDeleted = place.canBeDeleted;
     this._handleCardClick = handleCardClick;
     this._handleDelete = handleDelete;
     this._templateSelector = templateSelector;
