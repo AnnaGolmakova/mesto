@@ -1,9 +1,8 @@
 import Popup from './Popup.js';
 
 class PopupWithConfirmation extends Popup {
-  constructor(selector, confirmCallback) {
+  constructor(selector = '.popup_confirm') {
     super(selector);
-    this._confirmCallback = confirmCallback;
     this._confirmButton = this._popupElement.querySelector('.form__save-button');
     this.setEventListeners();
   }
@@ -28,7 +27,8 @@ class PopupWithConfirmation extends Popup {
     super.setEventListeners();
   }
 
-  open() {
+  open(confirmCallback) {
+    this._confirmCallback = confirmCallback;
     window.addEventListener("keydown", this._handleEnterClose);
     super.open();
   }

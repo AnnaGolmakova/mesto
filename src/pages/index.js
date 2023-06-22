@@ -4,6 +4,7 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/API.js';
 import './index.css';
@@ -12,10 +13,11 @@ const api = new Api();
 
 const profile = new UserInfo(profileOptions);
 
-api.getUserInfo()
+await api.getUserInfo()
   .then((result) => {
     profile.setUserInfo(result.name, result.about);
     profile.setAvatar(result.avatar);
+    profile.setID(result._id);
   })
   .catch((err) => {
     console.log(err);
@@ -54,9 +56,21 @@ enableValidation(validationParams);
 
 // Создание карточек
 function createCard(place) {
-  const cardElement = new Card(place.name, place.link, () => {
-    previewPopup.open(place.name, place.link)
-  });
+  const cardElement = new Card(
+    place._id,
+    place.name,
+    place.link,
+    place.likes.length,
+    place.owner._id === profile.getUserInfo().id,
+    () => {
+      previewPopup.open(place.name, place.link)
+    },
+    () => {
+      confirmationPopup.open(() => {
+        api.deleteCard(place._id);
+      })
+    }
+  );
   return cardElement.generateCard();
 }
 
@@ -78,13 +92,12 @@ cardsList.renderItems();
 // Поп-апы
 const previewPopup = new PopupWithImage();
 
+const confirmationPopup = new PopupWithConfirmation();
+
 const addPopup = new PopupWithForm('.popup_add', (values) => {
   api.createCard(values.name, values.url)
     .then((result) => {
-      cardsList.setItem({
-        name: values.name,
-        link: values.url
-      }, true);
+      cardsList.setItem(result, true);
     })
     .catch((err) => {
       console.log(err);

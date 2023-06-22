@@ -9,11 +9,14 @@
  */
 
 class Card {
-  constructor(title, imageUrl, handleCardClick, liked = false, templateSelector = '#card-template') {
+  constructor(cardID, title, imageUrl, liked, canBeDeleted, handleCardClick, handleDelete, templateSelector = '#card-template') {
+    this._cardID = cardID;
     this._title = title;
     this._imageUrl = imageUrl;
-    this._handleCardClick = handleCardClick;
     this._liked = liked;
+    this._canBeDeleted = canBeDeleted;
+    this._handleCardClick = handleCardClick;
+    this._handleDelete = handleDelete;
     this._templateSelector = templateSelector;
   }
 
@@ -31,6 +34,7 @@ class Card {
       this._handleLike();
     });
     this._deleteButton.addEventListener("click", () => {
+      this._handleDelete();
       this._deleteCard();
     });
     this._cardImage.addEventListener("click", () => {
@@ -54,7 +58,14 @@ class Card {
     this._card.querySelector('.card__title').textContent = this._title;
 
     this._likeButton = this._card.querySelector('.card__like-button');
+    this._likeCounter = this._card.querySelector('.card__like-counter');
+    this._likeCounter.textContent = this._liked;
+
     this._deleteButton = this._card.querySelector('.card__delete-button');
+
+    if (!this._canBeDeleted) {
+      this._deleteButton.style.display = "none";
+    }
 
     this._setEventListeners();
 

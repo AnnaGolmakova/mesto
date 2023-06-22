@@ -20,7 +20,8 @@ class UserInfo {
     return {
       name: this._name,
       job: this._job,
-      avatar: this._avatar
+      avatar: this._avatar,
+      id: this._id
     }
   }
 
@@ -35,6 +36,11 @@ class UserInfo {
     this._avatar = avatar;
     this._avatarElement.src = this._avatar;
   }
+
+  setID(userID) {
+    this._id = userID;
+  }
+
 }
 
 export default UserInfo;
