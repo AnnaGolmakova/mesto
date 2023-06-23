@@ -74,7 +74,7 @@ class Api {
       });
   }
 
-  putLike() {
+  putLike(cardID) {
     return fetch(`https://${this._host}/v1/${this._cohortID}/cards/${cardID}/likes`, {
       method: "PUT",
       headers: {
@@ -90,7 +90,7 @@ class Api {
       });
   }
 
-  removeLike() {
+  removeLike(cardID) {
     return fetch(`https://${this._host}/v1/${this._cohortID}/cards/${cardID}/likes`, {
       method: "DELETE",
       headers: {

@@ -57,20 +57,30 @@ enableValidation(validationParams);
 // Создание карточек
 function createCard(place) {
   const cardElement = new Card(
-    {
-      cardID: place._id,
-      title: place.name,
-      imageUrl: place.link,
-      liked: place.likes.length,
-      canBeDeleted: place.owner._id === profile.getUserInfo().id
-    },
+    place,
+    profile.getUserInfo().id,
     () => {
       previewPopup.open(place.name, place.link)
     },
     () => {
-      confirmationPopup.open(() => {
-        api.deleteCard(place._id);
+      return new Promise(function (resolve, reject) {
+        confirmationPopup.open(
+          () => {
+            resolve(() => {
+              return api.deleteCard(place._id)
+            })
+          },
+          () => {
+            reject("Удаление отменено")
+          }
+        )
       })
+    },
+    () => {
+      return api.putLike(place._id)
+    },
+    () => {
+      return api.removeLike(place._id)
     }
   );
   return cardElement.generateCard();
