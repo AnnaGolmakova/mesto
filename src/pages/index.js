@@ -104,7 +104,7 @@ const previewPopup = new PopupWithImage();
 const confirmationPopup = new PopupWithConfirmation();
 
 const addPopup = new PopupWithForm('.popup_add', (values) => {
-  api.createCard(values.name, values.url)
+  return api.createCard(values.name, values.url)
     .then((result) => {
       cardsList.setItem(result, true);
     })
@@ -114,7 +114,7 @@ const addPopup = new PopupWithForm('.popup_add', (values) => {
 });
 
 const editPopup = new PopupWithForm('.popup_edit', (values) => {
-  api.updateProfile(values.name, values.job)
+  return api.updateProfile(values.name, values.job)
     .then((result) => {
       profile.setUserInfo(values.name, values.job);
     })
@@ -124,7 +124,7 @@ const editPopup = new PopupWithForm('.popup_edit', (values) => {
 });
 
 const avatarPopup = new PopupWithForm('.popup_update-avatar', (values) => {
-  api.updateAvatar(values.url)
+  return api.updateAvatar(values.url)
     .then((result) => {
       profile.setAvatar(values.url);
     })
