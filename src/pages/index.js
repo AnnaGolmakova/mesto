@@ -13,11 +13,21 @@ const api = new Api();
 
 const profile = new UserInfo(profileOptions);
 
-await api.getUserInfo()
-  .then((result) => {
-    profile.setUserInfo(result.name, result.about);
-    profile.setAvatar(result.avatar);
-    profile.setID(result._id);
+const initialCards = [];
+const cardsList = new Section({
+  items: initialCards,
+  renderer: createCard
+});
+
+
+const initialData = [api.getUserInfo(), api.getCards()]
+Promise.all(initialData)
+  .then((results) => {
+    profile.setUserInfo(results[0].name, results[0].about);
+    profile.setAvatar(results[0].avatar);
+    profile.setID(results[0]._id);
+    initialCards.push(...results[1]);
+    cardsList.renderItems();
   })
   .catch((err) => {
     console.log(err);
@@ -86,20 +96,7 @@ function createCard(place) {
   return cardElement.generateCard();
 }
 
-const initialCards = await api.getCards()
-  .then((result) => {
-    return result;
-  })
-  .catch((err) => {
-    console.log(err);
-  });
 
-const cardsList = new Section({
-  items: initialCards,
-  renderer: createCard
-});
-
-cardsList.renderItems();
 
 // Поп-апы
 const previewPopup = new PopupWithImage();
