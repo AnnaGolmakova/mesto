@@ -3,7 +3,7 @@ import Popup from './Popup.js';
 class PopupWithConfirmation extends Popup {
   constructor(selector = '.popup_confirm') {
     super(selector);
-    this._confirmButton = this._popupElement.querySelector('.form__save-button');
+    this._confirmButton = this._popupElement.querySelector('.save-button');
     this.setEventListeners();
   }
 

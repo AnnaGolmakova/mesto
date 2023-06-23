@@ -21,6 +21,7 @@
 @import url(../blocks/avatar-button/avatar-button.css);
 @import url(../blocks/add-button/add-button.css);
 @import url(../blocks/edit-button/edit-button.css);
+@import url(../blocks/save-button/save-button.css);
 
 @import url(../blocks/cards/cards.css);
 
@@ -54,4 +55,3 @@
 @import url(../blocks/form/__input/_type_error/form__input_type_error.css);
 @import url(../blocks/form/__input/_subtitle/form__input_subtitle.css);
 @import url(../blocks/form/__input-error/form__input-error.css);
-@import url(../blocks/form/__save-button/form__save-button.css);
