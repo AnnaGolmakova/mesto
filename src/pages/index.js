@@ -73,18 +73,22 @@ function createCard(place) {
       previewPopup.open(place.name, place.link)
     },
     () => {
-      return new Promise(function (resolve, reject) {
+      const confirm = new Promise(function (resolve, reject) {
         confirmationPopup.open(
-          () => {
-            resolve(() => {
-              return api.deleteCard(place._id)
-            })
-          },
-          () => {
-            reject("Удаление отменено")
-          }
+          () => { resolve("Ok") },
+          () => { reject("Удаление отменено") }
         )
       })
+      confirm
+        .then(() => {
+          return api.deleteCard(place._id);
+        })
+        .then(() => {
+          cardElement.delete();
+        })
+        .catch((err) => {
+          console.log(err);
+        })
     },
     () => {
       return api.putLike(place._id)

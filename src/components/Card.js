@@ -39,12 +39,6 @@ class Card {
     });
     this._deleteButton.addEventListener("click", () => {
       this._handleDelete()
-        .then(() => {
-          this._deleteCard()
-        })
-        .catch((error) => {
-          console.log(error);
-        })
     });
     this._cardImage.addEventListener("click", () => {
       this._handleCardClick(this._title, this._imageUrl);
@@ -112,7 +106,7 @@ class Card {
     return this._card;
   }
 
-  _deleteCard() {
+  delete() {
     this._card.remove();
   }
 
