@@ -68,7 +68,7 @@ enableValidation(validationParams);
 function createCard(place) {
   const cardElement = new Card(
     place,
-    profile.getUserInfo().id,
+    profile.getUserID(),
     () => {
       previewPopup.open(place.name, place.link)
     },

@@ -25,6 +25,10 @@ class UserInfo {
     }
   }
 
+  getUserID() {
+    return this._id;
+  }
+
   setUserInfo(name, job) {
     this._name = name;
     this._job = job;
