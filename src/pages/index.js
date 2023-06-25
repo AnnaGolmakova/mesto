@@ -91,10 +91,22 @@ function createCard(place) {
         })
     },
     () => {
-      return api.putLike(place._id)
+      api.putLike(place._id)
+        .then((result) => {
+          cardElement.updateLikes(result.likes)
+        })
+        .catch((err) => {
+          console.log(err);
+        })
     },
     () => {
-      return api.removeLike(place._id)
+      api.removeLike(place._id)
+        .then((result) => {
+          cardElement.updateLikes(result.likes)
+        })
+        .catch((err) => {
+          console.log(err);
+        })
     }
   );
   return cardElement.generateCard();

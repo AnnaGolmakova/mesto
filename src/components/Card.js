@@ -51,7 +51,8 @@ class Card {
     })
   }
 
-  _updateLikes() {
+  updateLikes(likes) {
+    this._likes = likes;
     this._likeCounter.textContent = this._likes.length;
     if (this._isLikedByMe()) {
       this._likeButton.classList.add('card__like-button_active');
@@ -63,22 +64,8 @@ class Card {
   _handleLikeButton() {
     if (this._isLikedByMe()) {
       this._handleDislike()
-        .then((result) => {
-          this._likes = result.likes;
-          this._updateLikes(result);
-        })
-        .catch((error) => {
-          console.log(error);
-        })
     } else {
       this._handleLike()
-        .then((result) => {
-          this._likes = result.likes;
-          this._updateLikes(result);
-        })
-        .catch((error) => {
-          console.log(error);
-        })
     }
   }
 
@@ -93,7 +80,7 @@ class Card {
 
     this._likeButton = this._card.querySelector('.card__like-button');
     this._likeCounter = this._card.querySelector('.card__like-counter');
-    this._updateLikes()
+    this.updateLikes(this._likes)
 
     this._deleteButton = this._card.querySelector('.card__delete-button');
 
