@@ -5,6 +5,10 @@ class Api {
     this._host = 'mesto.nomoreparties.co';
   }
 
+  _checkResponse(res) {
+    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+  }
+
   getUserInfo() {
     return fetch(`https://${this._host}/v1/${this._cohortID}/users/me`, {
       method: "GET",
@@ -12,13 +16,7 @@ class Api {
         authorization: this._token
       }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then((res) => this._checkResponse(res))
   }
 
   getCards() {
@@ -28,13 +26,7 @@ class Api {
         authorization: this._token
       }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then((res) => this._checkResponse(res))
   }
 
   createCard(name, link) {
@@ -49,13 +41,7 @@ class Api {
         link: link
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then((res) => this._checkResponse(res))
   }
 
   deleteCard(cardID) {
@@ -65,13 +51,7 @@ class Api {
         authorization: this._token
       }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then((res) => this._checkResponse(res))
   }
 
   putLike(cardID) {
@@ -81,13 +61,7 @@ class Api {
         authorization: this._token
       }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then((res) => this._checkResponse(res))
   }
 
   removeLike(cardID) {
@@ -97,13 +71,7 @@ class Api {
         authorization: this._token
       }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then((res) => this._checkResponse(res))
   }
 
   updateProfile(name, about) {
@@ -118,13 +86,7 @@ class Api {
         about: about
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then((res) => this._checkResponse(res))
   }
 
   updateAvatar(avatar) {
@@ -138,13 +100,7 @@ class Api {
         avatar: avatar
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then((res) => this._checkResponse(res))
   }
 }
 
