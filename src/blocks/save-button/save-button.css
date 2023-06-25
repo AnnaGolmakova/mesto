@@ -1,4 +1,4 @@
-.form__save-button {
+.save-button {
   width: 100%;
   height: 46px;
   font-weight: 400;
@@ -14,18 +14,18 @@
 }
 
 @media only screen and (min-width: 800px) {
-  .form__save-button {
+  .save-button {
     font-size: 18px;
     line-height: 22px;
     height: 50px;
   }
 }
 
-.form__save-button:hover {
+.save-button:hover {
   opacity: 0.8;
 }
 
-.form__save-button:disabled {
+.save-button:disabled {
   background-color: #FFFFFF;
   opacity: 0.2;
   color: #000000;
