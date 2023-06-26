@@ -14,4 +14,18 @@ const validationParams = {
   errorClass: 'form__input-error_visible'
 }
 
-export { profileOptions, validationParams };
+// Кнопка добавления места
+const addButton = document.querySelector(".add-button");
+
+// Кнопка редактирования профиля
+const editButton = document.querySelector(".edit-button");
+
+// Кнопка редактирования аватара
+const avatarButton = document.querySelector(".avatar-button");
+
+// Форма редактирования профиля
+const formEditProfile = document.forms["edit-profile"];
+const nameInput = formEditProfile.querySelector(".form__input_title");
+const jobInput = formEditProfile.querySelector(".form__input_subtitle");
+
+export { profileOptions, validationParams, addButton, editButton, avatarButton, nameInput, jobInput };

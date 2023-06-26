@@ -1,4 +1,4 @@
-import { profileOptions, validationParams } from '../scripts/constants.js';
+import { profileOptions, validationParams, addButton, editButton, avatarButton, nameInput, jobInput } from '../scripts/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
@@ -33,21 +33,6 @@ Promise.all(initialData)
     console.log(err);
   });
 
-
-// Кнопка добавления места
-const addButton = document.querySelector(".add-button");
-
-// Кнопка редактирования профиля
-const editButton = document.querySelector(".edit-button");
-
-// Кнопка редактирования аватара
-const avatarButton = document.querySelector(".avatar-button");
-
-// Форма редактирования профиля
-const formEditProfile = document.forms["edit-profile"];
-const nameInput = formEditProfile.querySelector(".form__input_title");
-const jobInput = formEditProfile.querySelector(".form__input_subtitle");
-
 const formValidators = {}
 
 const enableValidation = (validationParams) => {
@@ -73,13 +58,12 @@ function createCard(place) {
       previewPopup.open(place.name, place.link)
     },
     () => {
-      const confirm = new Promise(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
         confirmationPopup.open(
           () => { resolve("Ok") },
           () => { reject("Удаление отменено") }
         )
       })
-      confirm
         .then(() => {
           return api.deleteCard(place._id);
         })
@@ -120,33 +104,48 @@ const previewPopup = new PopupWithImage();
 const confirmationPopup = new PopupWithConfirmation();
 
 const addPopup = new PopupWithForm('.popup_add', (values) => {
+  addPopup.displayLoading();
   return api.createCard(values.name, values.url)
     .then((result) => {
       cardsList.setItem(result, true);
+      addPopup.close();
     })
     .catch((err) => {
       console.log(err);
-    });
+    })
+    .finally(() => {
+      addPopup.finishLoading();
+    })
 });
 
 const editPopup = new PopupWithForm('.popup_edit', (values) => {
+  editPopup.displayLoading();
   return api.updateProfile(values.name, values.job)
-    .then((result) => {
+    .then(() => {
       profile.setUserInfo(values.name, values.job);
+      editPopup.close();
     })
     .catch((err) => {
       console.log(err);
-    });
+    })
+    .finally(() => {
+      editPopup.finishLoading();
+    })
 });
 
 const avatarPopup = new PopupWithForm('.popup_update-avatar', (values) => {
+  avatarPopup.displayLoading();
   return api.updateAvatar(values.url)
-    .then((result) => {
+    .then(() => {
       profile.setAvatar(values.url);
+      avatarPopup.close();
     })
     .catch((err) => {
       console.log(err);
-    });
+    })
+    .finally(() => {
+      avatarPopup.finishLoading();
+    })
 });
 
 function openEditPopup(evt) {

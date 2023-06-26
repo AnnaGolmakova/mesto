@@ -13,13 +13,6 @@ class PopupWithConfirmation extends Popup {
     this.close(false);
   }
 
-  _handleEnterClose(evt) {
-    if (evt.key === 'Enter') {
-      this._confirmCallback();
-      this.close(false);
-    }
-  }
-
   setEventListeners() {
     this._confirmButton.addEventListener('click', (evt) => {
       this._handleConfirm(evt);
@@ -30,7 +23,6 @@ class PopupWithConfirmation extends Popup {
   open(confirmCallback, cancelCallback) {
     this._confirmCallback = confirmCallback;
     this._cancelCallback = cancelCallback;
-    window.addEventListener("keydown", this._handleEnterClose.bind(this));
     super.open();
   }
 
@@ -38,7 +30,6 @@ class PopupWithConfirmation extends Popup {
     if (shouldRunCallback) {
       this._cancelCallback()
     }
-    window.removeEventListener("keydown", this._handleEnterClose);
     super.close();
   }
 

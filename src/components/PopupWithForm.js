@@ -28,17 +28,15 @@ class PopupWithForm extends Popup {
 
   _handleSubmit(evt) {
     evt.preventDefault();
+    this._submitCallback(this._getInputValues());
+  }
+
+  displayLoading() {
     this._submitButton.textContent = 'Сохранение...';
-    this._submitCallback(this._getInputValues())
-      .then(() => {
-        this.close();
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        this._submitButton.textContent = this._submitButtonText
-      });
+  }
+
+  finishLoading() {
+    this._submitButton.textContent = this._submitButtonText;
   }
 
   setEventListeners() {
